@@ -1,0 +1,8 @@
+node_modules
+.git
+.wwebjs_auth
+.wwebjs_cache
+.env
+.env.*
+npm-debug.log*
+render.yaml

@@ -8,14 +8,18 @@ if (!process.env.GEMINI_API_KEY) {
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const client = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: new LocalAuth({
+        dataPath: process.env.WHATSAPP_SESSION_PATH || './.wwebjs_auth'
+    }),
     puppeteer: {
         headless: true,
+        executablePath: process.env.CHROME_PATH || (
+            process.platform === 'win32' ? undefined : '/usr/bin/google-chrome-stable'
+        ),
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
             '--single-process',
